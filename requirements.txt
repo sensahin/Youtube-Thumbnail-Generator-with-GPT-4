@@ -1,0 +1,5 @@
+Flask
+selenium
+openai
+boto3
+requests

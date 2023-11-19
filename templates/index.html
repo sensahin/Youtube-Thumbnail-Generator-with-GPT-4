@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Thumbnail Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin: 20px auto;
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input[type=text] {
+            width: calc(100% - 20px); /* Adjusted width */
+            box-sizing: border-box;   /* Include padding and border in the element's total width and height */
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        input[type=submit] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+        }
+        input[type=submit]:hover {
+            background-color: #4cae4c;
+        }
+        #progressBarContainer {
+            width: 300px;
+            background-color: #eee;
+            border-radius: 4px;
+            margin: 20px auto;
+            display: none;
+        }
+        #progressBar {
+            height: 30px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            width: 0%;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Thumbnail Generator</h1>
+    <small>Powered by GPT-4-Vision and DALL-E 3</small>
+    <form action="/" method="post" onsubmit="startOperation()">
+        <label for="youtube_url">Enter YouTube URL:</label>
+        <input type="text" id="youtube_url" name="youtube_url">
+        <input type="submit" value="Generate Thumbnail">
+    </form>    
+    <!-- Progress Bar -->
+    <div id="progressBarContainer">
+        <div id="progressBar"></div>
+    </div>
+    <script>
+        function startOperation() {
+            document.getElementById('progressBarContainer').style.display = 'block';
+            var width = 0;
+            var interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // Update the text to show the completion message
+                    document.getElementById('progressBar').innerHTML = "Processing the image. Wait please.";
+                } else {
+                    width++;
+                    document.getElementById('progressBar').style.width = width + '%';
+                    document.getElementById('progressBar').innerHTML = width + '%';
+                }
+            }, 100); // Update the progress every 100ms
+        }
+    </script>    
+</body>
+</html>
